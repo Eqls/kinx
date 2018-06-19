@@ -1,14 +1,18 @@
 import React from 'react';
-import { Actions } from 'react-native-router-flux'
+import {
+  Actions
+}
+from 'react-native-router-flux'
 import styled from 'styled-components';
 import {
   View,
   Text,
   TextInput,
   Button,
-} from 'react-native';
+}
+from 'react-native';
 
-const Container = styled.View`
+const Container = styled.View `
   flex: 1;
   padding: 5px;
   flex-direction: column;
@@ -16,13 +20,17 @@ const Container = styled.View`
   align-items: center;
 `;
 
-const FormField = styled.TextInput`
+const FormField = styled.TextInput `
   height: 50px;
   border: 0.5px solid gray;
   border-radius: 3px;
   width: 100%;
-  margin: 15px 0 0 0;
-  padding: 5px;
+  margin: 10px 0 0 0;
+`;
+
+const ButtonWrapper = styled.View `
+  width: 100%;
+  padding-top: 10px;
 `;
 
 class SignUp extends React.Component {
@@ -42,6 +50,8 @@ class SignUp extends React.Component {
           value={this.state.username}
           placeholder='Enter Your username'
           autoCapitalize='none'
+          underlineColorAndroid="transparent"
+          textAlign={'center'}
         />
         <FormField
           onChangeText={(password) => this.setState({ password })}
@@ -49,6 +59,8 @@ class SignUp extends React.Component {
           type='password'
           placeholder='Enter Your password'
           autoCapitalize='none'
+          underlineColorAndroid="transparent"
+          textAlign={'center'}
           secureTextEntry
         />
         <FormField
@@ -57,17 +69,23 @@ class SignUp extends React.Component {
           type='password'
           placeholder='Confirm Your password'
           autoCapitalize='none'
+          underlineColorAndroid="transparent"
+          textAlign={'center'}
           secureTextEntry
         />
-        <Button
-          title='Sign Up'
-          color="#841584"
-        />
-        <Button
-          onPress={() => Actions.pop()}
-          title='Cancel'
-          color="#841584"
-        />
+        <ButtonWrapper>
+          <Button
+            title='Sign Up'
+            color="#841584"
+          />
+        </ButtonWrapper>
+        <ButtonWrapper>
+          <Button
+            onPress={() => Actions.pop()}
+            title='Cancel'
+            color="#841584"
+          />
+        </ButtonWrapper>
       </Container>
     );
   }
