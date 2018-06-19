@@ -25,39 +25,47 @@ const FormField = styled.TextInput`
   padding: 5px;
 `;
 
-class LoginScreen extends React.Component {
+class SignUp extends React.Component {
 
   state = {
     username: '',
-    password: ''
+    password: '',
+    passowrdV: ''
   }
 
   render() {
     return (
       <Container>
-        <Text>KINX</Text>
+        <Text>Join Us</Text>
         <FormField
           onChangeText={(username) => this.setState({ username })}
-          value={this.state.text}
+          value={this.state.username}
           placeholder='Enter Your username'
           autoCapitalize='none'
         />
         <FormField
           onChangeText={(password) => this.setState({ password })}
-          value={this.state.text}
+          value={this.state.password}
           type='password'
           placeholder='Enter Your password'
           autoCapitalize='none'
           secureTextEntry
         />
+        <FormField
+          onChangeText={(passwordV) => this.setState({ passwordV })}
+          value={this.state.passwordV}
+          type='password'
+          placeholder='Confirm Your password'
+          autoCapitalize='none'
+          secureTextEntry
+        />
         <Button
-          onPress={() => console.log('Login button pressed')}
-          title='Login'
+          title='Sign Up'
           color="#841584"
         />
         <Button
-          onPress={() => Actions.signup()}
-          title='Sign Up'
+          onPress={() => Actions.pop()}
+          title='Cancel'
           color="#841584"
         />
       </Container>
@@ -65,4 +73,4 @@ class LoginScreen extends React.Component {
   }
 }
 
-export default LoginScreen;
+export default SignUp;

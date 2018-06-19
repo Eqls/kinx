@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Router, Scene, Actions } from 'react-native-router-flux';
-import LoginScreen from './screens/LoginScreen';
-import SignUpScreen from './screens/SingUpScreen';
+import Login from './screens/Login';
+import SignUp from './screens/SingUp';
+import KinkList from './screens/KinkList';
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -11,15 +12,21 @@ export default class App extends Component<Props> {
         <Scene hideNavBar key="root">
           <Scene
             key="main"
-            component={LoginScreen}
-            title="LoginScreen"
+            component={Login}
+            title="Login"
             swipeEnabled
             initial
           />
           <Scene
             key="signup"
-            component={SignUpScreen}
-            title="SignUpScreen"
+            component={SignUp}
+            title="SignUp"
+            swipeEnabled
+          />
+          <Scene
+            key="kinklist"
+            component={KinkList}
+            title="kinklist"
             swipeEnabled
           />
         </Scene>
