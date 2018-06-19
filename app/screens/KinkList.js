@@ -52,7 +52,8 @@ class KinkList extends React.Component {
             onSelectionsChange={this.onSelectionsChange} />
         </ScrollWrapper>
         <Button 
-          title='Save' 
+          title='Save'
+          style={{width: '100%'}} 
           color='#841584' 
           onPress={this.onPressCallNextList} />
       </Container>
