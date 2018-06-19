@@ -4,14 +4,19 @@ import {
   View,
   ScrollView,
   Button
-}
-from 'react-native';
+} from 'react-native';
 import SelectMultiple from 'react-native-select-multiple';
+import styled from 'styled-components';
 
 const fruits = ['Apples', 'Oranges', 'Pears', 'Apples', 'Oranges', 'Pears', 'Apples', 'Oranges', 'Pears', 'Apples', 'Oranges', 'Pears',
   'Apples', 'Oranges', 'Pears', 'Apples', 'Oranges', 'Pears', 'Apples', 'Oranges', 'Pears', 'Apples', 'Oranges', 'Pears',
   'Apples', 'Oranges', 'Pears', 'Apples', 'Oranges', 'Pears', 'Apples', 'Oranges', 'Pears', 'Apples', 'Oranges', 'Pears'
 ]
+
+const Container = styled.View`
+  flex: 1;
+  flex-direction: column;
+`;
 
 class KinkList extends React.Component {
   state = {
@@ -28,9 +33,10 @@ class KinkList extends React.Component {
   onPressCallNextList = () => {
     console.log(this.state.selectedFruits);
   }
+
   render() {
     return (
-      <View>
+      <Container>
         <Text>Your KinX</Text>
         <ScrollView>
           <SelectMultiple
@@ -38,8 +44,11 @@ class KinkList extends React.Component {
             selectedItems={this.state.selectedFruits}
             onSelectionsChange={this.onSelectionsChange} />
         </ScrollView>
-        <Button title='Save' color="#841584" onPress={this.onPressCallNextList}></Button>
-      </View>
+        <Button 
+          title='Save' 
+          color='#841584' 
+          onPress={this.onPressCallNextList} />
+      </Container>
     );
   }
 }
