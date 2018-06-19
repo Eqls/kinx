@@ -3,7 +3,8 @@ import {
   Text,
   View,
   ScrollView,
-  Button
+  Button,
+  Platform
 } from 'react-native';
 import SelectMultiple from 'react-native-select-multiple';
 import styled from 'styled-components';
@@ -16,6 +17,12 @@ const fruits = ['Apples', 'Oranges', 'Pears', 'Apples', 'Oranges', 'Pears', 'App
 const Container = styled.View`
   flex: 1;
   flex-direction: column;
+  align-items: center;
+  padding: ${Platform.OS === 'ios' ? '20px 0 0 0' : '0'};
+`;
+
+const ScrollWrapper = styled.ScrollView`
+  width: 100%;
 `;
 
 class KinkList extends React.Component {
@@ -38,12 +45,12 @@ class KinkList extends React.Component {
     return (
       <Container>
         <Text>Your KinX</Text>
-        <ScrollView>
+        <ScrollWrapper>
           <SelectMultiple
             items={fruits}
             selectedItems={this.state.selectedFruits}
             onSelectionsChange={this.onSelectionsChange} />
-        </ScrollView>
+        </ScrollWrapper>
         <Button 
           title='Save' 
           color='#841584' 
