@@ -65,7 +65,7 @@ class Login extends React.Component {
         />
         <ButtonWrapper>
           <Button
-            onPress={() => Actions.kinklist()}
+            onPress={() => Actions.kinkrating()}
             title='Login'
             color="#841584"
           />
