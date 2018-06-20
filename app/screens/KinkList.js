@@ -5,8 +5,8 @@ import {
   ScrollView,
   Button,
   Platform
-}
-from 'react-native';
+} from 'react-native';
+import {Actions} from 'react-native-router-flux'
 import SelectMultiple from 'react-native-select-multiple';
 import styled from 'styled-components';
 
@@ -42,10 +42,6 @@ class KinkList extends React.Component {
     })
   }
 
-  onPressCallNextList = () => {
-    console.log(this.state.selectedFruits);
-  }
-
   render() {
     return (
       <Container>
@@ -60,7 +56,8 @@ class KinkList extends React.Component {
           <Button
             title='Save'
             color='#841584'
-            onPress={this.onPressCallNextList} />
+            onPress={() => Actions.kinkrating({data: this.state.selectedFruits})}
+          />
         </ButtonWrapper>
       </Container>
     );

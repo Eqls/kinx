@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Actions
-}
-from 'react-native-router-flux'
+import {Actions} from 'react-native-router-flux'
 import styled from 'styled-components';
 import {
   View,
@@ -65,7 +62,7 @@ class Login extends React.Component {
         />
         <ButtonWrapper>
           <Button
-            onPress={() => Actions.kinkrating()}
+            onPress={() => Actions.kinklist()}
             title='Login'
             color="#841584"
           />
