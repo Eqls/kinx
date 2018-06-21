@@ -1,5 +1,8 @@
 import React from 'react';
-import {Actions} from 'react-native-router-flux'
+import {
+  Actions
+}
+from 'react-native-router-flux'
 import styled from 'styled-components';
 import {
   View,
