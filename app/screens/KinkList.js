@@ -4,15 +4,13 @@ import {
   View,
   ScrollView,
   Button,
-  Platform
-}
-from 'react-native';
+  Platform,
+  StyleSheet
+} from 'react-native';
 import {
   Actions
-}
-from 'react-native-router-flux'
+} from 'react-native-router-flux'
 import SelectMultiple from 'react-native-select-multiple';
-import styled from 'styled-components';
 
 const kinx = [{
   value: 1,
@@ -424,20 +422,21 @@ const kinx = [{
   label: 'Uniforms'
 }]
 
-const Container = styled.View `
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  padding: ${Platform.OS === 'ios' ? '20px 0 0 0' : '0'};
-`;
-
-const ScrollWrapper = styled.ScrollView `
-  width: 100%;
-`;
-
-const ButtonWrapper = styled.View `
-  width: 100%;
-`;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingTop: Platform.OS === 'ios' ? 20 : 0
+  },
+  scrollWrapper: {
+    width: '100%'
+  },
+  buttonWrapper: {
+    width: '100%',
+    height: 40
+  }
+});
 
 class KinkList extends React.Component {
   state = {
@@ -453,22 +452,22 @@ class KinkList extends React.Component {
 
   render() {
     return (
-      <Container>
+      <View style={styles.container}>
         <Text>Your KinX</Text>
-        <ScrollWrapper>
+        <ScrollView style={styles.scrollWrapper}>
           <SelectMultiple
             items={kinx.map((item => item))}
             selectedItems={this.state.selectedFruits}
             onSelectionsChange={this.onSelectionsChange} />
-        </ScrollWrapper>
-        <ButtonWrapper>
+        </ScrollView>
+        <View style={styles.buttonWrapper}>
           <Button
             title='Save'
             color='#841584'
-            onPress={() => this.state.selectedFruits.length !== 0 && Actions.kinkrating({data: this.state.selectedFruits})}
+            onPress={() => this.state.selectedFruits.length !== 0 && Actions.kinkrating({ data: this.state.selectedFruits })}
           />
-        </ButtonWrapper>
-      </Container>
+        </View>
+      </View>
     );
   }
 }

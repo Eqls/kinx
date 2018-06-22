@@ -4,12 +4,8 @@ import {
   StyleSheet,
   Image,
   Button
-}
-from 'react-native';
-import {
-  Actions
-}
-from 'react-native-router-flux'
+} from 'react-native';
+import {Actions} from 'react-native-router-flux'
 
 const styles = StyleSheet.create({
   container: {
@@ -23,13 +19,12 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25
+  },
+  buttonWrapper: {
+    width: '100%',
+    paddingTop: 10
   }
 });
-
-const ButtonWrapper = styled.View `
-  width: 100%;
-  padding-top: 10px;
-`;
 
 class Profile extends React.Component {
   render() {
@@ -39,27 +34,27 @@ class Profile extends React.Component {
           style={styles.avatar}
           source={require('../assets/images/avatar.png')}
         />
-        <ButtonWrapper>
+        <View style={styles.buttonWrapper}>
           <Button
             title='Manage your KinX'
             color='#841584'
             onPress={() => Actions.kinklist()}
           />
-        </ButtonWrapper>
-        <ButtonWrapper>
+        </View>
+        <View style={styles.buttonWrapper}>
           <Button
             title='Sumbit guest Kinx'
             color='#841584'
             onPress={() => Actions.kinklist()}
           />
-        </ButtonWrapper>
-        <ButtonWrapper>
+        </View>
+        <View style={styles.buttonWrapper}>
           <Button
             title='Most Recent Result'
             color='#841584'
             onPress={() => Actions.kinkcomparison()}
           />
-        </ButtonWrapper>
+        </View>
       </View>
     );
   }

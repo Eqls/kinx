@@ -3,30 +3,28 @@ import {
   Text,
   Platform,
   ScrollView,
-  Button
-}
-from 'react-native';
+  Button,
+  StyleSheet
+} from 'react-native';
 import {
   Actions
-}
-from 'react-native-router-flux'
-import styled from 'styled-components';
-import Stars from 'react-native-stars';
+} from 'react-native-router-flux'
 import {
   KinkRatingRow
-}
-from '../components/KinkRatingRow';
+} from '../components/KinkRatingRow';
 
-const ButtonWrapper = styled.View `
-  width: 100%;
-`;
-
-const Container = styled.View `
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  padding: ${Platform.OS === 'ios' ? '20px 0 0 0' : '0'};
-`;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingTop: Platform.OS === 'ios' ? 20 : 0
+  },
+  buttonWrapper: {
+    width: '100%',
+    height: 40
+  }
+});
 
 class KinkRating extends React.Component {
 
@@ -49,7 +47,6 @@ class KinkRating extends React.Component {
 
   componentDidMount() {
     let ratingObjects = [];
-    console.log(this.props.data);
     for (let i = 0; i < this.props.data.length; i++) {
       let ratingObj = {
         name: this.props.data[i].label,
@@ -80,7 +77,7 @@ class KinkRating extends React.Component {
       ratings
     } = this.state;
     return (
-      <Container>
+      <View style={styles.container}>
         <ScrollView>
           {
             ratings.map((item, index) =>
@@ -94,14 +91,14 @@ class KinkRating extends React.Component {
             )
           }
         </ScrollView>
-        <ButtonWrapper>
+        <View style={styles.buttonWrapper}>
           <Button
             title='Save'
             color='#841584'
             onPress={() => Actions.kinkcomparison({data: this.state.ratings})}
           />
-        </ButtonWrapper>
-      </Container>
+        </View>
+      </View>
     );
   }
 }

@@ -3,29 +3,29 @@ import {
   Text,
   ScrollView,
   Platform,
-  Button
+  Button,
+  StyleSheet
 }
 from 'react-native';
 import {
   Actions
-}
-from 'react-native-router-flux'
+} from 'react-native-router-flux'
 import {
   KinkRatingDisplayRow
-}
-from '../components/KinkRatingDisplayRow';
-import styled from 'styled-components';
+} from '../components/KinkRatingDisplayRow';
 
-const Container = styled.View `
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  padding: ${Platform.OS === 'ios' ? '20px 0 0 0' : '0'};
-`;
-
-const ButtonWrapper = styled.View `
-  width: 100%;
-`;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingTop: Platform.OS === 'ios' ? 20 : 0
+  },
+  buttonWrapper: {
+    width: '100%',
+    height: 40
+  }
+});
 
 class KinkComparison extends React.Component {
 
@@ -104,7 +104,7 @@ class KinkComparison extends React.Component {
       calculatedRatings
     } = this.state;
     return (
-      <Container>
+      <View style={styles.container}>
         <Text>xd</Text>
         <ScrollView>
           {
@@ -117,14 +117,14 @@ class KinkComparison extends React.Component {
             )
           }
         </ScrollView>
-        <ButtonWrapper>
+        <View style={styles.buttonWrapper}>
           <Button
             title='Finish'
             color='#841584'
             onPress={() => Actions.popTo('main')}
           />
-        </ButtonWrapper>
-      </Container>
+        </View>
+      </View>
     );
   }
 }

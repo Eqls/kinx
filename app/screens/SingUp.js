@@ -1,34 +1,36 @@
 import React from 'react';
 import { Actions } from 'react-native-router-flux'
-import styled, { consolidateStreamedStyles } from 'styled-components';
 import {
   View,
   Text,
   TextInput,
   Button,
+  StyleSheet
 } from 'react-native';
-import {Register} from './../api/Auth'
+import {Register} from './../api/Auth';
 
-const Container = styled.View`
-  flex: 1;
-  padding: 5px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const FormField = styled.TextInput`
-  height: 50px;
-  border: 0.5px solid gray;
-  border-radius: 3px;
-  width: 100%;
-  margin: 10px 0 0 0;
-`;
-
-const ButtonWrapper = styled.View`
-  width: 100%;
-  padding-top: 10px;
-`;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10
+  },
+  formField: {
+    height: 50,
+    borderWidth: 0.5,
+    borderColor: 'gray',
+    borderRadius: 3,
+    width: '100%',
+    marginTop: 10
+  },
+  buttonWrapper: {
+    width: '100%',
+    height: 40,
+    paddingTop: 10
+  }
+});
 
 class SignUp extends React.Component {
 
@@ -67,10 +69,11 @@ class SignUp extends React.Component {
       Actions.kinklist();
     }
     return (
-      <Container>
+      <View style={container}>
         <Text>Join Us</Text>
         <Text>{error}</Text>
-        <FormField
+        <TextInput
+          style={styles.formField}
           onChangeText={(username) => this.handleChange({username: username})}
           value={user.username}
           placeholder='Enter Your username'
@@ -78,7 +81,8 @@ class SignUp extends React.Component {
           underlineColorAndroid="transparent"
           textAlign={'center'}
         />
-        <FormField
+        <TextInput
+          style={styles.formField}
           onChangeText={(password) => this.handleChange({password: password})}
           value={user.password}
           type='password'
@@ -88,7 +92,8 @@ class SignUp extends React.Component {
           textAlign={'center'}
           secureTextEntry
         />
-        <FormField
+        <TextInput
+          style={styles.formField}
           onChangeText={(passwordV) => this.handleChange({passwordV: passwordV})}
           value={user.passwordV}
           type='password'
@@ -98,21 +103,21 @@ class SignUp extends React.Component {
           textAlign={'center'}
           secureTextEntry
         />
-        <ButtonWrapper>
+        <View style={style.buttonWrapper}>
           <Button
             onPress={this.sendSignUpRequest}
             title='Sign Up'
             color="#841584"
           />
-        </ButtonWrapper>
-        <ButtonWrapper>
+        </View>
+        <View style={style.buttonWrapper}>
           <Button
             onPress={() => Actions.pop()}
             title='Cancel'
             color="#841584"
           />
-        </ButtonWrapper>
-      </Container>
+        </View>
+      </View>
     );
   }
 }
