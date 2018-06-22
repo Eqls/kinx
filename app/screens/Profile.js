@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
 
 const ButtonWrapper = styled.View `
   width: 100%;
+  padding-top: 10px;
 `;
 
 class Profile extends React.Component {
