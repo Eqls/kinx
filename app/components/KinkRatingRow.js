@@ -1,17 +1,9 @@
 import React from 'react';
-<<<<<<< Updated upstream
-import {
-  View,
-  Text
-}
-from 'react-native';
-=======
 import { 
   View, 
   Text,
   StyleSheet
 } from 'react-native';
->>>>>>> Stashed changes
 import Stars from 'react-native-stars';
 
 const styles = StyleSheet.create({
