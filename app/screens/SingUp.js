@@ -69,7 +69,7 @@ class SignUp extends React.Component {
       Actions.kinklist();
     }
     return (
-      <View style={container}>
+      <View style={styles.container}>
         <Text>Join Us</Text>
         <Text>{error}</Text>
         <TextInput
@@ -103,14 +103,14 @@ class SignUp extends React.Component {
           textAlign={'center'}
           secureTextEntry
         />
-        <View style={style.buttonWrapper}>
+        <View style={styles.buttonWrapper}>
           <Button
             onPress={this.sendSignUpRequest}
             title='Sign Up'
             color="#841584"
           />
         </View>
-        <View style={style.buttonWrapper}>
+        <View style={styles.buttonWrapper}>
           <Button
             onPress={() => Actions.pop()}
             title='Cancel'

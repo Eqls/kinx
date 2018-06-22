@@ -4,7 +4,8 @@ import {
   ScrollView,
   Platform,
   Button,
-  StyleSheet
+  StyleSheet,
+  View
 }
 from 'react-native';
 import {
