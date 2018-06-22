@@ -8,7 +8,7 @@ import {
   Actions
 }
 from 'react-native-router-flux';
-import Login from './screens/Login';
+import SignIn from './screens/SignIn';
 import SignUp from './screens/SingUp';
 import KinkList from './screens/KinkList';
 import KinkRating from './screens/KinkRating';
@@ -22,8 +22,8 @@ export default class App extends Component < Props > {
         <Scene hideNavBar key="root">
           <Scene
             key="main"
-            component={Login}
-            title="Login"
+            component={SignIn}
+            title="SignIn"
             swipeEnabled
             initial
           />

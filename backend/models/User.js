@@ -7,8 +7,9 @@ const USER_ROLES = {
 }
 
 const UserSchema = mongoose.Schema({
-  name: {
+  username: {
     type: String,
+    unique: true,
     required: true
   },
   password: {
@@ -19,11 +20,7 @@ const UserSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true
-  },
+  email: String,
   role: {
     type: String,
     default: USER_ROLES.USER
@@ -39,6 +36,13 @@ module.exports.getById = function(id, callback) {
 module.exports.getByEmail = function(email, callback) {
   let query = {
     'email': email
+  }
+  User.findOne(query, callback);
+}
+
+module.exports.getByUsername = function(username, callback) {
+  let query = {
+    'username': username
   }
   User.findOne(query, callback);
 }

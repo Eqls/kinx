@@ -1,8 +1,6 @@
 import React from 'react';
-import {
-  Actions
-}
-from 'react-native-router-flux'
+import {Actions} from 'react-native-router-flux';
+import {Login} from './../api/Auth';
 import styled from 'styled-components';
 import {
   View,
@@ -10,8 +8,7 @@ import {
   TextInput,
   Button,
   Platform
-}
-from 'react-native';
+} from 'react-native';
 
 const Container = styled.View `
   flex: 1;
@@ -34,28 +31,56 @@ const ButtonWrapper = styled.View `
   padding-top: 10px;
 `;
 
-class Login extends React.Component {
+class SignIn extends React.Component {
 
   state = {
-    username: '',
-    password: ''
+    error: '',
+    done: false,
+    user: {
+      username: '',
+      password: '',
+    }
+  }
+
+  sendLoginRequest = () => {
+    const { user } = this.state;
+    Login(user, res => {
+      this.setState({
+        ...res
+      });
+    });
+  }
+
+  handleChange = (data) => {
+    this.setState({
+      ...this.state,
+      user: {
+        ...this.state.user,
+        ...data
+      }
+    })
   }
 
   render() {
+    const {user, error, done} = this.state;
+    if(done) {
+      Actions.kinklist();
+    }
     return (
       <Container>
         <Text>KINX</Text>
+        <Text>{error}</Text>
         <FormField
-          onChangeText={(username) => this.setState({ username })}
-          value={this.state.text}
+          onChangeText={(username) => this.handleChange({username: username})}
+          value={user.name}
           placeholder='Enter Your username'
           autoCapitalize='none'
           underlineColorAndroid="transparent"
           textAlign={'center'}
         />
         <FormField
-          onChangeText={(password) => this.setState({ password })}
-          value={this.state.text}
+          onChangeText={(password) => this.handleChange({password: password})}
+          value={user.password}
           type='password'
           placeholder='Enter Your password'
           autoCapitalize='none'
@@ -65,7 +90,7 @@ class Login extends React.Component {
         />
         <ButtonWrapper>
           <Button
-            onPress={() => Actions.kinklist()}
+            onPress={() => this.sendLoginRequest}
             title='Login'
             color="#841584"
           />
@@ -82,4 +107,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default SignIn;

@@ -1,18 +1,15 @@
 import React from 'react';
-import {
-  Actions
-}
-from 'react-native-router-flux'
-import styled from 'styled-components';
+import { Actions } from 'react-native-router-flux'
+import styled, { consolidateStreamedStyles } from 'styled-components';
 import {
   View,
   Text,
   TextInput,
   Button,
-}
-from 'react-native';
+} from 'react-native';
+import {Register} from './../api/Auth'
 
-const Container = styled.View `
+const Container = styled.View`
   flex: 1;
   padding: 5px;
   flex-direction: column;
@@ -20,7 +17,7 @@ const Container = styled.View `
   align-items: center;
 `;
 
-const FormField = styled.TextInput `
+const FormField = styled.TextInput`
   height: 50px;
   border: 0.5px solid gray;
   border-radius: 3px;
@@ -28,7 +25,7 @@ const FormField = styled.TextInput `
   margin: 10px 0 0 0;
 `;
 
-const ButtonWrapper = styled.View `
+const ButtonWrapper = styled.View`
   width: 100%;
   padding-top: 10px;
 `;
@@ -36,26 +33,54 @@ const ButtonWrapper = styled.View `
 class SignUp extends React.Component {
 
   state = {
-    username: '',
-    password: '',
-    passowrdV: ''
+    error: '',
+    done: false,
+    user: {
+      username: '',
+      password: '',
+      passwordV: ''
+    }
+  }
+
+  sendSignUpRequest = () => {
+    const { user } = this.state;
+    Register(user, res => {
+      this.setState({
+        ...res
+      });
+    });
+  }
+
+  handleChange = (data) => {
+    this.setState({
+      ...this.state,
+      user: {
+        ...this.state.user,
+        ...data
+      }
+    })
   }
 
   render() {
+    const { loaded, error, user, done } = this.state;
+    if (done) {
+      Actions.kinklist();
+    }
     return (
       <Container>
         <Text>Join Us</Text>
+        <Text>{error}</Text>
         <FormField
-          onChangeText={(username) => this.setState({ username })}
-          value={this.state.username}
+          onChangeText={(username) => this.handleChange({username: username})}
+          value={user.username}
           placeholder='Enter Your username'
           autoCapitalize='none'
           underlineColorAndroid="transparent"
           textAlign={'center'}
         />
         <FormField
-          onChangeText={(password) => this.setState({ password })}
-          value={this.state.password}
+          onChangeText={(password) => this.handleChange({password: password})}
+          value={user.password}
           type='password'
           placeholder='Enter Your password'
           autoCapitalize='none'
@@ -64,8 +89,8 @@ class SignUp extends React.Component {
           secureTextEntry
         />
         <FormField
-          onChangeText={(passwordV) => this.setState({ passwordV })}
-          value={this.state.passwordV}
+          onChangeText={(passwordV) => this.handleChange({passwordV: passwordV})}
+          value={user.passwordV}
           type='password'
           placeholder='Confirm Your password'
           autoCapitalize='none'
@@ -75,6 +100,7 @@ class SignUp extends React.Component {
         />
         <ButtonWrapper>
           <Button
+            onPress={this.sendSignUpRequest}
             title='Sign Up'
             color="#841584"
           />

@@ -30,7 +30,15 @@ const Container = styled.View `
 
 class KinkRating extends React.Component {
 
+
   state = {
+    rating_descs: [
+      'Hard limit / Something I won’t do / Turn off',
+      'Does nothing for me, but isn’t a limit',
+      'I would do it if the other person enjoyed it',
+      'Haven’t done it but want to try',
+      'Very much into / Something I enjoy / Turn On'
+    ],
     ratings: [{
       name: '',
       rating: 1,
@@ -77,10 +85,10 @@ class KinkRating extends React.Component {
           {
             ratings.map((item, index) =>
               <KinkRatingRow
-                half={false}
-                key={index}
-                index={index}
-                data={item}
+                key={index} 
+                index={index} 
+                data={item} 
+                descs={this.state.rating_descs}
                 handleChange={this.handleChange}
               />
             )

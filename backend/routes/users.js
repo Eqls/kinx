@@ -6,32 +6,45 @@ const auth = require('../middlewares/auth');
 const User = require('../models/User');
 const config = require('../config');
 
-router.post('/register', auth.isLogged, auth.isAdmin, (req, res) => {
+router.post('/register', (req, res) => {
   let newUser = User({
-    name: req.body.name,
-    password: req.body.password,
-    email: req.body.email,
-    role: req.body.role
+    ...req.body
   });
-  User.create(newUser, (err, user) => {
-    if (err) {
+  try {
+    User.create(newUser, (err, user) => {
+      if(err) console.log(err);
       res.json({
-        success: false,
-        message: err
-      });
-    } else {
-      res.json({
-        success: true
-      });
-    }
-  })
+        success: err ? false : true,
+        error: err && 'Something went wrong!'
+      })
+    });
+  }
+  catch (err) {
+    console.log(err);
+    res.json({
+      success: false,
+      error: 'Something went wrong!'
+    })
+  }
 });
 
 router.post('/auth', (req, res) => {
-  if (req.body.credentials.email !== null || req.body.credentials.password !== null) {
-    let email = req.body.credentials.email;
-    let password = req.body.credentials.password;
-    User.getByEmail(email, function (err, user) {
+    let username = req.body.username;
+    let password = req.body.password;
+    if(!username) {
+      res.json({
+        success: false,
+        error: 'Please enter your username!'
+      });      
+    }
+    if(!password) {
+      res.json({
+        success: false,
+        error: 'Please enter your password!'
+      });      
+    }
+    try {
+    User.getByUsername(username, function (err, user) {
       if (err || !user) {
         res.json({
           success: false,
@@ -59,9 +72,12 @@ router.post('/auth', (req, res) => {
         });
       }
     });
-  } else {
-    res.status(401).json({ success: false });
-  }
+    } catch (err) {
+      res.json({
+        success: false,
+        error: 'Something went wrong!'
+      });
+    }
 });
 
 // returns all players from the database
