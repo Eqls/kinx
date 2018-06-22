@@ -12,6 +12,7 @@ import Login from './screens/Login';
 import SignUp from './screens/SingUp';
 import KinkList from './screens/KinkList';
 import KinkRating from './screens/KinkRating';
+import KinkComparison from './screens/KinkComparison';
 
 type Props = {};
 export default class App extends Component < Props > {
@@ -42,6 +43,12 @@ export default class App extends Component < Props > {
             key="kinkrating"
             component={KinkRating}
             title="kinkrating"
+            swipeEnabled
+          />
+          <Scene
+            key="kinkcomparison"
+            component={KinkComparison}
+            title="kinkcomparison"
             swipeEnabled
           />
         </Scene>
