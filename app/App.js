@@ -1,21 +1,20 @@
 import React, {
   Component
 }
-from 'react';
+  from 'react';
 import {
   Router,
   Scene,
   Actions
-}
-from 'react-native-router-flux';
+} from 'react-native-router-flux';
 import SignIn from './screens/SignIn';
-import SignUp from './screens/SingUp';
+import SignUp from './screens/SignUp';
 import KinkList from './screens/KinkList';
 import KinkRating from './screens/KinkRating';
 import KinkComparison from './screens/KinkComparison';
 
 type Props = {};
-export default class App extends Component < Props > {
+export default class App extends Component<Props> {
   render() {
     return (
       <Router>

@@ -94,7 +94,7 @@ class SignIn extends React.Component {
         />
         <View style={styles.buttonWrapper}>
           <Button
-            onPress={() => this.sendLoginRequest}
+            onPress={this.sendLoginRequest}
             title='Login'
             color="#841584"
           />

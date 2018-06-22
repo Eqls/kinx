@@ -3,7 +3,7 @@ import {AsyncStorage} from 'react-native';
 
 const URL = 'http://localhost:3000/api/'
 
-export const SignUp = (credentials, callback) => {
+export const Login = (credentials, callback) => {
   axios.post(URL + 'users/auth', { ...credentials })
     .then(async res => {
       if (res.data.success) {
@@ -35,7 +35,7 @@ export const Register = (user, callback) => {
   })
     .then(res => {
       if (res.data.success) {
-        SignUp(user, callback)
+        Login(user, callback)
       } else {
         callback({
           done: false,
@@ -43,10 +43,10 @@ export const Register = (user, callback) => {
         })
       }
     })
-    .catch(error => {
+    .catch(err => {
       callback({
         done: false,
-        error: err
+        error: 'Something bad happened, you are not supposed to see this'
       });
     });
 }
