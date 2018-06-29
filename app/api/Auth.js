@@ -1,10 +1,12 @@
 import axios from 'axios';
 import {
-  AsyncStorage
+  AsyncStorage,
+  Platform
 }
 from 'react-native';
 
-const URL = 'http://192.168.1.61:3000/api/'
+const androidIP = '192.168.1.61'
+const URL = Platform.OS === 'ios' ? 'http://localhost:3000/api/' : 'http://' + androidIP + ':3000/api/';
 
 export const Login = (credentials, callback) => {
   console.log('logging in', credentials);
