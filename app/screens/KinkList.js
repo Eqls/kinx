@@ -6,10 +6,12 @@ import {
   Button,
   Platform,
   StyleSheet
-} from 'react-native';
+}
+from 'react-native';
 import {
   Actions
-} from 'react-native-router-flux'
+}
+from 'react-native-router-flux'
 import SelectMultiple from 'react-native-select-multiple';
 
 const kinx = [{
@@ -433,8 +435,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   buttonWrapper: {
-    width: '100%',
-    height: 40
+    width: '100%'
   }
 });
 

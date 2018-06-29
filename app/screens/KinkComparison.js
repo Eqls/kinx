@@ -10,10 +10,12 @@ import {
 from 'react-native';
 import {
   Actions
-} from 'react-native-router-flux'
+}
+from 'react-native-router-flux'
 import {
   KinkRatingDisplayRow
-} from '../components/KinkRatingDisplayRow';
+}
+from '../components/KinkRatingDisplayRow';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,8 +25,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'ios' ? 20 : 0
   },
   buttonWrapper: {
-    width: '100%',
-    height: 40
+    width: '100%'
   }
 });
 

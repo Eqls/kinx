@@ -1,6 +1,12 @@
 import React from 'react';
-import {Actions} from 'react-native-router-flux';
-import {Login} from './../api/Auth';
+import {
+  Actions
+}
+from 'react-native-router-flux';
+import {
+  Login
+}
+from './../api/Auth';
 import {
   View,
   Text,
@@ -8,7 +14,8 @@ import {
   Button,
   Platform,
   StyleSheet
-} from 'react-native';
+}
+from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -45,7 +52,9 @@ class SignIn extends React.Component {
   }
 
   sendLoginRequest = () => {
-    const { user } = this.state;
+    const {
+      user
+    } = this.state;
     Login(user, res => {
       this.setState({
         ...res
@@ -64,8 +73,12 @@ class SignIn extends React.Component {
   }
 
   render() {
-    const {user, error, done} = this.state;
-    if(done) {
+    const {
+      user,
+      error,
+      done
+    } = this.state;
+    if (done) {
       Actions.kinklist();
     }
     return (

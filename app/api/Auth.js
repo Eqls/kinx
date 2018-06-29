@@ -1,12 +1,20 @@
 import axios from 'axios';
-import {AsyncStorage} from 'react-native';
+import {
+  AsyncStorage
+}
+from 'react-native';
 
-const URL = 'http://localhost:3000/api/'
+const URL = 'http://192.168.1.61:3000/api/'
 
 export const Login = (credentials, callback) => {
-  axios.post(URL + 'users/auth', { ...credentials })
+  console.log('logging in', credentials);
+  axios.post(URL + 'users/auth', { ...credentials
+    })
     .then(async res => {
-      if (res.data.success) {
+      console.log(res);
+      console.log(res.data.success);
+      if (res.data.success == true) {
+        console.log('in');
         await AsyncStorage.setItem('jwt', res.data.token)
       }
       callback({
@@ -31,12 +39,14 @@ export const Register = (user, callback) => {
     })
   }
   axios.post(URL + 'users/register', {
-    ...user
-  })
+      ...user
+    })
     .then(res => {
+      console.log('reg suc');
       if (res.data.success) {
         Login(user, callback)
-      } else {
+      }
+      else {
         callback({
           done: false,
           error: res.data.error
@@ -44,6 +54,7 @@ export const Register = (user, callback) => {
       }
     })
     .catch(err => {
+      console.log('error', err);
       callback({
         done: false,
         error: 'Something bad happened, you are not supposed to see this'

@@ -1,13 +1,20 @@
 import React from 'react';
-import { Actions } from 'react-native-router-flux'
+import {
+  Actions
+}
+from 'react-native-router-flux'
 import {
   View,
   Text,
   TextInput,
   Button,
   StyleSheet
-} from 'react-native';
-import {Register} from './../api/Auth';
+}
+from 'react-native';
+import {
+  Register
+}
+from './../api/Auth';
 
 const styles = StyleSheet.create({
   container: {
@@ -45,8 +52,13 @@ class SignUp extends React.Component {
   }
 
   sendSignUpRequest = () => {
-    const { user } = this.state;
+    console.log('xddddddddddddd');
+    const {
+      user
+    } = this.state;
     Register(user, res => {
+      console.log('ddddddddddd');
+      console.log('response from reg', res);
       this.setState({
         ...res
       });
@@ -64,8 +76,14 @@ class SignUp extends React.Component {
   }
 
   render() {
-    const { loaded, error, user, done } = this.state;
+    const {
+      loaded,
+      error,
+      user,
+      done
+    } = this.state;
     if (done) {
+      console.log('done');
       Actions.kinklist();
     }
     return (

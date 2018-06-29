@@ -7,12 +7,14 @@ const User = require('../models/User');
 const config = require('../config');
 
 router.post('/register', (req, res) => {
+  console.log('ttt');
   let newUser = User({
     ...req.body
   });
   try {
     User.create(newUser, (err, user) => {
-      if(err) console.log(err);
+      console.log(newUser);
+      if (err) console.log(err);
       res.json({
         success: err ? false : true,
         error: err && 'Something went wrong!'
@@ -29,33 +31,36 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/auth', (req, res) => {
-    let username = req.body.username;
-    let password = req.body.password;
-    if(!username) {
-      res.json({
-        success: false,
-        error: 'Please enter your username!'
-      });      
-    }
-    if(!password) {
-      res.json({
-        success: false,
-        error: 'Please enter your password!'
-      });      
-    }
-    try {
-    User.getByUsername(username, function (err, user) {
+  let username = req.body.username;
+  let password = req.body.password;
+  if (!username) {
+    res.json({
+      success: false,
+      error: 'Please enter your username!'
+    });
+  }
+  if (!password) {
+    res.json({
+      success: false,
+      error: 'Please enter your password!'
+    });
+  }
+  try {
+    User.getByUsername(username, function(err, user) {
       if (err || !user) {
         res.json({
           success: false,
           error: 'User does not exist!'
         });
-      } else {
-        User.comparePassword(password, user.password, function (err, isMatch) {
+      }
+      else {
+        User.comparePassword(password, user.password, function(err, isMatch) {
           if (isMatch) {
             user.password = undefined;
             user.created = undefined;
-            const token = 'Bearer ' + jwt.sign({ uid: user._id }, config.JWT_SECRET, {
+            const token = 'Bearer ' + jwt.sign({
+              uid: user._id
+            }, config.JWT_SECRET, {
               expiresIn: 604800 // 1 week
             });
             res.json({
@@ -63,7 +68,8 @@ router.post('/auth', (req, res) => {
               token: token,
               user: user
             });
-          } else {
+          }
+          else {
             res.json({
               success: false,
               error: 'Incorrect password!'
@@ -72,12 +78,13 @@ router.post('/auth', (req, res) => {
         });
       }
     });
-    } catch (err) {
-      res.json({
-        success: false,
-        error: 'Something went wrong!'
-      });
-    }
+  }
+  catch (err) {
+    res.json({
+      success: false,
+      error: 'Something went wrong!'
+    });
+  }
 });
 
 // returns all players from the database
@@ -108,7 +115,8 @@ router.put('/', auth.isLogged, auth.isAdmin, (req, res) => {
         success: false,
         message: err
       });
-    } else {
+    }
+    else {
       res.json({
         success: true
       });
@@ -123,7 +131,8 @@ router.delete('/:id', auth.isLogged, auth.isAdmin, (req, res) => {
         success: false,
         message: err
       });
-    } else {
+    }
+    else {
       res.json({
         success: true
       });
@@ -140,7 +149,8 @@ router.post('/validate', auth.isLogged, (req, res) => {
         success: false,
         message: "User with this id doesnt exist!"
       });
-    } else {
+    }
+    else {
       res.json({
         success: true,
         user: {
