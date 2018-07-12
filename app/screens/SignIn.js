@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 10
+    padding: 10,
+    backgroundColor: 'white'
   },
   formField: {
     height: 50,
@@ -79,7 +80,7 @@ class SignIn extends React.Component {
       done
     } = this.state;
     if (done) {
-      Actions.kinklist();
+      Actions.profile();
     }
     return (
       <View style={styles.container}>

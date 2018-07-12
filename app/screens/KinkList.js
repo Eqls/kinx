@@ -13,6 +13,7 @@ import {
 }
 from 'react-native-router-flux'
 import SelectMultiple from 'react-native-select-multiple';
+import NavBar from '../components/NavBar';
 
 const kinx = [{
   value: 1,
@@ -428,7 +429,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    alignItems: 'center',
     paddingTop: Platform.OS === 'ios' ? 20 : 0
   },
   scrollWrapper: {
@@ -452,9 +452,12 @@ class KinkList extends React.Component {
   }
 
   render() {
+    console.log('props', this.props.personal);
     return (
       <View style={styles.container}>
-        <Text>Your KinX</Text>
+        <NavBar
+          text={this.props.data}
+        />
         <ScrollView style={styles.scrollWrapper}>
           <SelectMultiple
             items={kinx.map((item => item))}
@@ -463,9 +466,9 @@ class KinkList extends React.Component {
         </ScrollView>
         <View style={styles.buttonWrapper}>
           <Button
-            title='Save'
+            title='Rate your selected Kinx'
             color='#841584'
-            onPress={() => this.state.selectedFruits.length !== 0 && Actions.kinkrating({ data: this.state.selectedFruits })}
+            onPress={() => this.state.selectedFruits.length !== 0 && Actions.kinkrating({ data: this.state.selectedFruits, personal: this.props.personal})}
           />
         </View>
       </View>

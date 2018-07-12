@@ -16,13 +16,17 @@ import {
   KinkRatingRow
 }
 from '../components/KinkRatingRow';
+import NavBar from '../components/NavBar';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    paddingTop: Platform.OS === 'ios' ? 20 : 0,
+    backgroundColor: 'white'
+  },
+  semiContainer: {
     alignItems: 'center',
-    paddingTop: Platform.OS === 'ios' ? 20 : 0
   },
   buttonWrapper: {
     width: '100%'
@@ -30,7 +34,6 @@ const styles = StyleSheet.create({
 });
 
 class KinkRating extends React.Component {
-
 
   state = {
     rating_descs: [
@@ -75,30 +78,46 @@ class KinkRating extends React.Component {
     });
   }
 
+  onPressPersonal = () => {
+    console.log('save');
+    Actions.popTo('profile');
+  }
+
+  onPressGuest = () => {
+    console.log('onpressbtn2');
+    Actions.kinkcomparison({
+      data: this.state.ratings
+    })
+  }
+
   render() {
+    console.log('props2', this.props.personal);
     const {
       ratings
     } = this.state;
     return (
       <View style={styles.container}>
-        <ScrollView>
-          {
-            ratings.map((item, index) =>
-              <KinkRatingRow
-                key={index}
-                index={index}
-                data={item}
-                descs={this.state.rating_descs}
-                handleChange={this.handleChange}
-              />
-            )
+        <NavBar
+          text='Rate your Kinx!'
+        />
+        <ScrollView contentContainerStyle={styles.semiContainer}>
+          {ratings.map((item, index) =>
+            <KinkRatingRow
+              key={index}
+              index={index}
+              data={item}
+              descs={this.state.rating_descs}
+              handleChange={this.handleChange}
+              half={false}
+            />
+          )
           }
         </ScrollView>
         <View style={styles.buttonWrapper}>
           <Button
             title='Save'
             color='#841584'
-            onPress={() => Actions.kinkcomparison({data: this.state.ratings})}
+            onPress={() => this.props.personal ? this.onPressPersonal() : this.onPressGuest()}
           />
         </View>
       </View>

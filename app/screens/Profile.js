@@ -4,8 +4,12 @@ import {
   StyleSheet,
   Image,
   Button
-} from 'react-native';
-import {Actions} from 'react-native-router-flux'
+}
+from 'react-native';
+import {
+  Actions
+}
+from 'react-native-router-flux'
 
 const styles = StyleSheet.create({
   container: {
@@ -26,7 +30,29 @@ const styles = StyleSheet.create({
   }
 });
 
+const yourButtonText = 'Manage your KinX';
+const guestButtonText = 'Submit guest Kinx';
+const personalButton = true;
+const guestButton = false
+
 class Profile extends React.Component {
+
+  onPressPersonal = () => {
+    console.log('onpress');
+    Actions.kinklist({
+      data: yourButtonText,
+      personal: personalButton
+    })
+  }
+
+  onPressGuest = () => {
+    console.log('onpressbtn2');
+    Actions.kinklist({
+      data: guestButtonText,
+      personal: guestButton
+    })
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -36,16 +62,16 @@ class Profile extends React.Component {
         />
         <View style={styles.buttonWrapper}>
           <Button
-            title='Manage your KinX'
+            title= {yourButtonText}
             color='#841584'
-            onPress={() => Actions.kinklist()}
+            onPress={() => this.onPressPersonal()}
           />
         </View>
         <View style={styles.buttonWrapper}>
           <Button
-            title='Sumbit guest Kinx'
+            title= {guestButtonText}
             color='#841584'
-            onPress={() => Actions.kinklist()}
+            onPress={() => this.onPressGuest()}
           />
         </View>
         <View style={styles.buttonWrapper}>

@@ -5,7 +5,7 @@ import {
 }
 from 'react-native';
 
-const androidIP = '192.168.1.61'
+const androidIP = '192.168.1.251'
 const URL = Platform.OS === 'ios' ? 'http://localhost:3000/api/' : 'http://' + androidIP + ':3000/api/';
 
 export const Login = (credentials, callback) => {

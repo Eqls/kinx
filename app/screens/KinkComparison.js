@@ -16,13 +16,17 @@ import {
   KinkRatingDisplayRow
 }
 from '../components/KinkRatingDisplayRow';
+import NavBar from '../components/NavBar';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    paddingTop: Platform.OS === 'ios' ? 20 : 0,
+    backgroundColor: 'white'
+  },
+  semiContainer: {
     alignItems: 'center',
-    paddingTop: Platform.OS === 'ios' ? 20 : 0
   },
   buttonWrapper: {
     width: '100%'
@@ -107,14 +111,16 @@ class KinkComparison extends React.Component {
     } = this.state;
     return (
       <View style={styles.container}>
-        <Text>xd</Text>
-        <ScrollView>
+        <NavBar
+          text='Results'
+        />
+        <ScrollView contentContainerStyle={styles.semiContainer}>
           {
             calculatedRatings.map((item, index) =>
               <KinkRatingDisplayRow
-                half={true}
                 data={item}
                 key={index}
+                half={true}
               />
             )
           }
@@ -123,7 +129,7 @@ class KinkComparison extends React.Component {
           <Button
             title='Finish'
             color='#841584'
-            onPress={() => Actions.popTo('main')}
+            onPress={() => Actions.popTo('profile')}
           />
         </View>
       </View>
