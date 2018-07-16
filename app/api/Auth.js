@@ -47,7 +47,7 @@ export const Register = (user, callback) => {
     })
     .then(res => {
       console.log("reg suc");
-      if (res.data.success) {
+      if (!res.data.error) {
         Login(user, callback);
       } else {
         callback({
