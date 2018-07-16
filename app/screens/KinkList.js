@@ -460,7 +460,7 @@ class KinkList extends React.Component {
         />
         <ScrollView style={styles.scrollWrapper}>
           <SelectMultiple
-            items={kinx.map((item => item))}
+            items={kinx}
             selectedItems={this.state.selectedFruits}
             onSelectionsChange={this.onSelectionsChange} />
         </ScrollView>

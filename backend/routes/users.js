@@ -1,165 +1,82 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
+const config = require("../config");
+const model = require("../models");
+const middleware = require("../middleware");
+const rest = require("../utils/rest");
 
-const auth = require('../middlewares/auth');
-const User = require('../models/User');
-const config = require('../config');
-
-router.post('/register', (req, res) => {
-  console.log('ttt');
-  let newUser = User({
-    ...req.body
+router.post("/", (req, res) => {
+  model.User.create(new model.User(req.body), (err, response) => {
+    if (err) next(err);
+    res.json(response);
   });
-  try {
-    User.create(newUser, (err, user) => {
-      console.log(newUser);
-      if (err) console.log(err);
-      res.json({
-        success: err ? false : true,
-        error: err && 'Something went wrong!'
-      })
-    });
-  }
-  catch (err) {
-    console.log(err);
-    res.json({
-      success: false,
-      error: 'Something went wrong!'
-    })
-  }
 });
 
-router.post('/auth', (req, res) => {
-  let username = req.body.username;
-  let password = req.body.password;
-  if (!username) {
-    res.json({
-      success: false,
-      error: 'Please enter your username!'
-    });
-  }
-  if (!password) {
-    res.json({
-      success: false,
-      error: 'Please enter your password!'
-    });
-  }
-  try {
-    User.getByUsername(username, function(err, user) {
-      if (err || !user) {
-        res.json({
-          success: false,
-          error: 'User does not exist!'
-        });
-      }
-      else {
-        User.comparePassword(password, user.password, function(err, isMatch) {
-          if (isMatch) {
-            user.password = undefined;
-            user.created = undefined;
-            const token = 'Bearer ' + jwt.sign({
-              uid: user._id
-            }, config.JWT_SECRET, {
+router.post("/auth", (req, res, next) => {
+  console.log(req.body);
+  if (req.body.username !== undefined || req.body.password !== undefined) {
+    let username = req.body.username;
+    let password = req.body.password;
+    model.User.getByUsername(username, function(err, result) {
+      let user = result._doc;
+      if (err) next(err);
+      if (!user) next("User not found!");
+      model.User.comparePassword(password, user.password, function(
+        err,
+        isMatch
+      ) {
+        if (err) next(err);
+        if (isMatch) {
+          user.password = undefined;
+          user.created = undefined;
+          const token =
+            "Bearer " +
+            jwt.sign({ uid: user._id }, config.JWT_SECRET, {
               expiresIn: 604800 // 1 week
             });
-            res.json({
-              success: true,
-              token: token,
-              user: user
-            });
-          }
-          else {
-            res.json({
-              success: false,
-              error: 'Incorrect password!'
-            });
-          }
-        });
-      }
+          res.json({
+            ...user,
+            token
+          });
+        } else {
+          next("Incorrect password!");
+        }
+      });
     });
-  }
-  catch (err) {
-    res.json({
-      success: false,
-      error: 'Something went wrong!'
-    });
+  } else {
+    next("Missing credentials");
   }
 });
 
-// returns all players from the database
-router.get('/', auth.isLogged, (req, res) => {
-  User.getAll((err, users) => {
-    if (err) res.json({
-      success: false,
-      message: err
-    });
-    res.json({
-      success: true,
-      all: users
-    });
-  })
-});
-
-router.put('/', auth.isLogged, auth.isAdmin, (req, res) => {
-  let updatedUser = new User({
-    _id: req.body._id,
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-    role: req.body.role,
+router.get("/", middleware.auth, (req, res) => {
+  model.User.getAll((err, response) => {
+    if (err) next(err);
+    res.json(response);
   });
-  User.update(updatedUser, (err, user) => {
-    if (err) {
-      res.json({
-        success: false,
-        message: err
-      });
-    }
-    else {
-      res.json({
-        success: true
-      });
-    }
-  })
 });
 
-router.delete('/:id', auth.isLogged, auth.isAdmin, (req, res) => {
-  User.delete(req.params.id, (err, user) => {
-    if (err) {
-      res.json({
-        success: false,
-        message: err
-      });
-    }
-    else {
-      res.json({
-        success: true
-      });
-    }
-  })
+router.put("/", middleware.auth, (req, res) => {
+  model.User.update(req.body, (err, response) => {
+    if (err) next(err);
+    res.json(response);
+  });
+});
+
+router.delete("/", middleware.auth, (req, res, next) => {
+  rest.delete(req, res, next, model.User);
 });
 
 //validatinta useri
-router.post('/validate', auth.isLogged, (req, res) => {
-  console.log(req.uid);
-  User.getById(req.uid, (err, user) => {
-    if (err || !user) {
-      res.json({
-        success: false,
-        message: "User with this id doesnt exist!"
-      });
-    }
-    else {
-      res.json({
-        success: true,
-        user: {
-          _id: user._id,
-          email: user.email,
-          name: user.name
-        }
-      })
-    }
+router.post("/validate", middleware.auth, (req, res) => {
+  model.User.getById(req.uid, (err, user) => {
+    if (err) next(err);
+    if (!user) next("User not found!");
+    res.json({
+      _id: user._id,
+      username: user.username,
+      name: user.name
+    });
   });
 });
 
