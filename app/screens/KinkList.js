@@ -80,12 +80,7 @@ const kinx = [{
   label: 'Golden Showers'
 }, {
   value: 22,
-  label: 'Lactation (giving)',
-  id: 1
-}, {
-  value: 23,
-  label: 'Lactation (receiving)',
-  id: 1
+  label: 'Lactation (giving, receiving)',
 }, {
   value: 24,
   label: 'Licking (body homage with tongue)'
@@ -94,10 +89,7 @@ const kinx = [{
   label: 'Menstruation (sex during)'
 }, {
   value: 26,
-  label: 'Oral-Anal Play (rimming, receiving)'
-}, {
-  value: 27,
-  label: 'Oral-Anal Play (doing to another)'
+  label: 'Oral-Anal Play (doing, receiving)'
 }, {
   value: 28,
   label: 'Phone Sex'
@@ -109,12 +101,7 @@ const kinx = [{
   label: 'Sexual Deprivation'
 }, {
   value: 31,
-  label: 'Strap-Ons (receiving)',
-  id: 2
-}, {
-  value: 32,
-  label: 'Strap-Ons (wearing/giving)',
-  id: 2
+  label: 'Strap-Ons (doing, receiving)',
 }, {
   value: 33,
   label: 'Swapping (being given)'
@@ -126,12 +113,7 @@ const kinx = [{
   label: 'Swallowing (cum)'
 }, {
   value: 36,
-  label: 'Talking Dirty (Talker)',
-  id: 3
-}, {
-  value: 37,
-  label: 'Talking Dirty (Talkee)',
-  id: 3
+  label: 'Talking Dirty (Talker, Talkee)',
 }, {
   value: 38,
   label: 'Tickling'

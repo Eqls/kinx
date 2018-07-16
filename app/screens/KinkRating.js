@@ -58,7 +58,6 @@ class KinkRating extends React.Component {
         name: this.props.data[i].label,
         rating: 1,
         value: this.props.data[i].value,
-        id: this.props.data[i].id
       }
       ratingObjects.push(ratingObj);
     }
