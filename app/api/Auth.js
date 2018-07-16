@@ -1,5 +1,5 @@
 import axios from "axios";
-import {AsyncStorage, Platform} from "react-native";
+import {AsyncStorage, Platform,} from "react-native";
 
 const androidIP = "192.168.1.224";
 const URL = Platform.OS === "ios"
@@ -21,19 +21,19 @@ export const Login = (credentials, callback) => {
       done: res.data.error
         ? false
         : true,
-      error: res.data.error,
+      error: res.data.error
     });
   }).catch(err => {
-    callback({done: false, error: err,});
+    callback({done: false, error: err});
   });
 }).catch(err => {
-  callback({done: false, error: err});
+  callback({done: false, error: err,});
 });
 };
 
 export const Register = (user, callback) => {
 if (user.password !== user.passwordV) {
-  callback({loaded: true, done: false, error: "Passwords did not match!"});
+  callback({loaded: true, done: false, error: "Passwords did not match!",});
 }
 axios.post(URL + "users/", {
   ...user
@@ -42,10 +42,10 @@ axios.post(URL + "users/", {
   if (res.data.success) {
     Login(user, callback);
   } else {
-    callback({done: false, error: res.data.error});
+    callback({done: false, error: res.data.error,});
   }
 }).catch(err => {
   console.log("error", err);
-  callback({done: false, error: "Something bad happened, you are not supposed to see this"});
+  callback({done: false, error: "Something bad happened, you are not supposed to see this",});
 });
 };
