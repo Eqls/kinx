@@ -16,7 +16,7 @@ export const Login = (credentials, callback) => {
     .then(async res => {
       console.log(res);
       console.log(res.data.success);
-      if (res.data.success == true) {
+      if (!res.data.error) {
         console.log("in");
         await AsyncStorage.setItem("jwt", res.data.token);
       }

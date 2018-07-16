@@ -14,7 +14,6 @@ router.post("/", (req, res) => {
 });
 
 router.post("/auth", (req, res, next) => {
-  console.log(req.body);
   if (req.body.username !== undefined || req.body.password !== undefined) {
     let username = req.body.username;
     let password = req.body.password;
