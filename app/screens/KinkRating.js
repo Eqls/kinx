@@ -103,7 +103,6 @@ class KinkRating extends React.Component {
               data={item}
               descs={this.state.rating_descs}
               handleChange={this.handleChange}
-              half={false}
             />
           ))}
         </ScrollView>

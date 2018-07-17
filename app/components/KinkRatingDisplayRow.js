@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import Stars from "react-native-stars";
+import StarRating from "react-native-star-rating";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,16 +22,14 @@ export const KinkRatingDisplayRow = props => (
     {console.log(props.data.rating)}
     <Text style={styles.border}>★・・・・・・★・・・・・・★・・・・・・★</Text>
     <Text style={styles.text}>{props.data.name}</Text>
-    <Stars
-      value={1.5}
-      half={true}
-      spacing={8}
-      count={5}
-      starSize={50}
-      backingColor="transparent"
+    <StarRating
+      disabled={true}
+      maxStars={5}
       fullStar={require("./../icons/filled-heart.png")}
       emptyStar={require("./../icons/empty-heart.png")}
       halfStar={require("./../icons/half-heart.png")}
+      rating={props.data.rating}
+      starSize={60}
     />
   </View>
 );

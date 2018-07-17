@@ -50,13 +50,13 @@ class KinkComparison extends React.Component {
       console.log("started loop", xxx.length);
       for (var e = 0; e < xxx.length; e++) {
         if (this.props.data[i].name === xxx[e].name) {
-          let currentRating =
-            Platform.OS === "ios"
-              ? (this.props.data[i].rating + xxx[e].rating) / 2
-              : (this.props.data[i].rating + xxx[e].rating) / 2 - 1;
+          // let currentRating =
+          //   Platform.OS === "ios"
+          //     ? (this.props.data[i].rating + xxx[e].rating) / 2
+          //     : (this.props.data[i].rating + xxx[e].rating) / 2 - 1;
           let calculatedRating = {
             name: this.props.data[i].name,
-            rating: currentRating,
+            rating: (this.props.data[i].rating + xxx[e].rating) / 2,
             value: this.props.data[i].value
           };
           console.log("calculated", calculatedRating);
@@ -76,7 +76,7 @@ class KinkComparison extends React.Component {
         <NavBar text="Results" />
         <ScrollView contentContainerStyle={styles.semiContainer}>
           {calculatedRatings.map((item, index) => (
-            <KinkRatingDisplayRow data={item} key={index} half={true} />
+            <KinkRatingDisplayRow data={item} key={index} />
           ))}
         </ScrollView>
         <View style={styles.buttonWrapper}>
