@@ -11,8 +11,9 @@ import {
 import { Actions } from "react-native-router-flux";
 import { KinkRatingDisplayRow } from "../components/KinkRatingDisplayRow";
 import NavBar from "../components/NavBar";
-// import { connect } from "react-redux";
 import store from "../store";
+
+const { dispatch } = store;
 
 const styles = StyleSheet.create({
   container: {
@@ -33,16 +34,21 @@ class KinkComparison extends React.Component {
   state = {
     calculatedRatings: []
   };
-  //
-  // getData = async () => {
-  //   console.log('async called');
-  //   AsyncStorage.getItem('test').then((data) => this.setState({
-  //     yourKinx: data
-  //   }))
-  //   console.log(this.state.yourKinx);
-  // }
+
+  onClose = () => {
+    // AsyncStorage.setItem(
+    //   "ComparedData",
+    //   JSON.stringify(this.state.calculatedRatings)
+    // );
+    dispatch.kinx.saveLocal(this.state.calculatedRatings);
+    console.log("cdcddcd", store.getState());
+    Actions.popTo("profile");
+  };
 
   componentDidMount() {
+    if (this.props.dataName) {
+      console.log("got the name");
+    }
     let kinxFromStore = store.getState();
     let xxx = [...kinxFromStore.kinx];
     let calculatedRatingObjects = [];
@@ -50,10 +56,6 @@ class KinkComparison extends React.Component {
       console.log("started loop", xxx.length);
       for (var e = 0; e < xxx.length; e++) {
         if (this.props.data[i].name === xxx[e].name) {
-          // let currentRating =
-          //   Platform.OS === "ios"
-          //     ? (this.props.data[i].rating + xxx[e].rating) / 2
-          //     : (this.props.data[i].rating + xxx[e].rating) / 2 - 1;
           let calculatedRating = {
             name: this.props.data[i].name,
             rating: (this.props.data[i].rating + xxx[e].rating) / 2,
@@ -83,7 +85,7 @@ class KinkComparison extends React.Component {
           <Button
             title="Finish"
             color="#841584"
-            onPress={() => Actions.popTo("profile")}
+            onPress={() => this.onClose()}
           />
         </View>
       </View>

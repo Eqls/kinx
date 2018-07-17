@@ -6,15 +6,12 @@ import KinkList from "./screens/KinkList";
 import KinkRating from "./screens/KinkRating";
 import KinkComparison from "./screens/KinkComparison";
 import Profile from "./screens/Profile";
-
-// import { Provider } from "react-redux";
-// import store from "./store";
+import KinkResults from "./screens/KinkResults";
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      // <Provider store={store}>
       <Router>
         <Scene hideNavBar key="root">
           <Scene
@@ -49,9 +46,14 @@ export default class App extends Component<Props> {
             title="kinkcomparison"
             swipeEnabled
           />
+          <Scene
+            key="kinkresults"
+            component={KinkResults}
+            title="kinkresults"
+            swipeEnabled
+          />
         </Scene>
       </Router>
-      // </Provider>
     );
   }
 }
