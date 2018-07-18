@@ -35,17 +35,9 @@ class KinkResults extends React.Component {
     loadedRating: []
   };
 
-  componentWillMount() {}
-
-  componentWillMount() {
+  componentDidMount() {
     let xd = store.getState();
     console.log("res", xd.kinx);
-    // if (xd.kinx.length === 0) {
-    //   console.log("inside");
-    //   dispatch.kinx.asyncGetLocal();
-    //   xd = store.getState();
-    //   console.log(xd);
-    // }
     this.setState({
       loadedRating: xd.kinx
     });

@@ -75,7 +75,6 @@ class KinkRating extends React.Component {
   };
 
   onPressPersonal = () => {
-    // AsyncStorage.setItem("test", JSON.stringify(this.state.ratings));
     dispatch.kinx.save(this.state.ratings);
     console.log(store.getState());
     Actions.popTo("profile");

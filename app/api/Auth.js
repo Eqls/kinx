@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AsyncStorage, Platform } from "react-native";
 
-const androidIP = "192.168.1.101";
+const androidIP = "192.168.1.224";
 const URL =
   Platform.OS === "ios"
     ? "http://localhost:3000/api/"

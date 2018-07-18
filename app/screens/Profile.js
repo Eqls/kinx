@@ -31,19 +31,7 @@ const guestButton = false;
 const resultButtonText = "Most Recent Result";
 
 class Profile extends React.Component {
-  // state = {
-  //   localRating: []
-  // };
-
-  // componentDidMount() {
-  //   AsyncStorage.getItem("ComparedData").then(token => {
-  //     console.log("token", token),
-  //       this.setState({
-  //         localRating: JSON.parse(token)
-  //       });
-  //   });
-  // }
-  componentWillMount() {
+  componentDidMount() {
     dispatch.kinx.asyncGetLocal();
   }
 
@@ -67,9 +55,7 @@ class Profile extends React.Component {
     console.log("onpressbtn3");
     Actions.kinkresults({
       dataName: resultButtonText
-      // data: this.state.localRating
     });
-    // console.log(this.state.localRating);
   };
 
   render() {
